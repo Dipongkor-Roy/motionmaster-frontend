@@ -1,6 +1,9 @@
+import ContactUs from "./ContactUs/ContactUs";
+import ExtraSection from "./ExtraSection/ExtraSection";
 import Hero from "./Hero/Hero";
 import OurClients from "./OurClients/OurClients";
 import ServicesSection from "./ServicesSection/ServicesSection";
+import Testimonial from "./Testimonial/Testimonial";
 
 
 const Home = () => {
@@ -9,6 +12,9 @@ const Home = () => {
             <Hero/>
             <OurClients/>
             <ServicesSection/>
+            <ExtraSection/>
+            <Testimonial/>
+            <ContactUs/>
         </div>
     );
 };
