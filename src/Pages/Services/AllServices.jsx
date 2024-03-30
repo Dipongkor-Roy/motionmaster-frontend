@@ -20,10 +20,10 @@ const AllServices = () => {
                   />
                 </a>
                 <div className="mt-4">
-                  <h3 className="text-gray-500 text-xs tracking-widest title-font font-medium mb-1">
+                  <h3 className="text-gray-500 text-xs tracking-widest title-font font-semibold mb-1">
                     {service.name}
                   </h3>
-                  <h2 className="text-gray-900 title-font text-sm font-light">
+                  <h2 className="text-gray-900 title-font text-sm font-light h-16">
                     {service.description}
                   </h2>
                   <div className="pt-3 flex justify-between items-center">

@@ -3,13 +3,13 @@ import logo from "../../assets/LogoMm.png";
 const Footer = () => {
     return (
         <footer className="pt-4 text-gray-600 body-font">
-  <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+  <div className="container font-bricolage-grotesque px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
     <div className=" flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
     <span className=" text-white p-2 bg-green-100 rounded-full"> <img className="w-1/12 h-1/4" src={logo} alt="" /></span>
-      <span className="  ml-3 text-xl ">Motion Master</span>
+      <span className="ml-3 text-md ">Motion Master</span>
     </div>
     <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2024 Motion Master —
-      <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@motionmaster</a>
+      <a href="https://twitter.com/Juniordipu" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@motionmaster</a>
     </p>
     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
       <a className="text-gray-500">

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import Dropdown from '../../Components/Dropdown/Dropdown'
 import { useScrollPosition } from "../../Hooks/useScrollPosition";
 import logo from "../../assets/LogoMm.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const navBarDetails=["Home","All Services","About Us","Contact Us"]
+  const [user] = useState("false");
+  const navBarDetails = ["Home", "All Services", "About Us", "Contact Us"];
   const scrollPos = useScrollPosition();
   const [isdark, setIsdark] = useState(
     JSON.parse(localStorage.getItem("isdark"))
@@ -21,26 +23,51 @@ const Navbar = () => {
       }`}
     >
       <div className="flex-1 navbar-start">
-      <div className="dropdown ">
-      <div tabIndex={0} role="button" className="p-[12px] lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-      </div>
-      <ul tabIndex={0} className="shadow-lg menu menu-sm dropdown-content mt-3 z-[1] p-2  bg-base-100 rounded-box w-52">
-      {navBarDetails.map((item,index)=>(
-         <li key={index}><Link to={`/${item.split(" ")[0]}`}><a className="text-sm font-md">{item}</a></Link></li>
-      ))}
-      </ul>
-    </div>
-        <Link to='/'><img className="w-16 h-auto" src={logo} alt="Logo" /></Link>
+        <div className="dropdown ">
+          <div tabIndex={0} role="button" className="p-[12px] lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="shadow-lg menu menu-sm dropdown-content mt-3 z-[1] p-2  bg-base-100 rounded-box w-52"
+          >
+            {navBarDetails.map((item, index) => (
+              <li key={index}>
+                <Link to={`/${item.split(" ")[0]}`}>
+                  <a className="text-sm font-md">{item}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Link to="/">
+          <img className="w-16 h-auto" src={logo} alt="Logo" />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-      {navBarDetails.map((item,index)=>(
-        <li key={index}><Link to={`/${item}`}><a className="text-sm font-md">{item}</a></Link></li>
-      ))}
-     
-    </ul>
-  </div>
+        <ul className="menu menu-horizontal px-1">
+          {navBarDetails.map((item, index) => (
+            <li key={index}>
+              <Link to={`/${item}`}>
+                <a className="text-sm font-md">{item}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="flex-none ">
         <div className="btn btn-ghost btn-circle">
           <label className="swap swap-rotate">
@@ -95,40 +122,44 @@ const Navbar = () => {
           <div
             tabIndex={0}
             className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-          >
-            
-          </div>
+          ></div>
         </div>
         <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
+          {user ? (
+           <Dropdown/>
+          ) : (
+            <>
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
     </div>
