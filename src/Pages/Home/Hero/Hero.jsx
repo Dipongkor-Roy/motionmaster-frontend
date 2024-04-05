@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -15,10 +16,10 @@ const Hero = () => {
                   Transforming Moments into Masterpieces!
                 </span>
               </h1>
-              <button className="btn btn-primary mr-4 px-[18px] rounded-3xl text-center">
+             <Link to='/logIn'> <button className="btn btn-primary mr-4 px-[18px] rounded-3xl text-center">
                 <span className="flex items-center justify-center">⚡️ <p>Get Started</p></span>
-              </button>
-              <button className="btn rounded-3xl">All Services</button>
+              </button></Link>
+             <Link to='/services'> <button className="btn rounded-3xl">All Services</button></Link>
             </div>
             <div className="absolute top-0 left-0 w-1/2 h-1/2 z-0">
               <svg

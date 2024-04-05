@@ -1,16 +1,23 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const LogIn = () => {
+  const { register, handleSubmit } = useForm()
+  const onSubmitLogIn = (data) => {
+    console.log(data)
+    // reset();
+  }
+
+  
   return (
-    <section className="text-gray-600 body-font">
+    <form onSubmit={handleSubmit(onSubmitLogIn)} className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
           <h1 className="title-font font-medium text-3xl text-gray-900">
-            Slow-carb next level shoindcgoitch ethical authentic, poko scenester
+          Securely access your Motion Master account to streamline your video editing projects with ease
           </h1>
           <p className="leading-relaxed mt-4">
-            Poke slow-carb mixtape knausgaard, typewriter street art gentrify
-            hammock starladder roathse. Craies vegan tousled etsy austin.
+          Enter your credentials to unlock a world of creative possibilities.
           </p>
         </div>
         <div className="lg:w-2/6 md:w-1/2 bg-slate-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
@@ -22,7 +29,7 @@ const LogIn = () => {
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">
               Email
             </label>
-            <input
+            <input {...register("email", { required: true })} 
               type="email"
               id="email"
               name="email"
@@ -36,7 +43,7 @@ const LogIn = () => {
             >
               Password
             </label>
-            <input
+            <input  {...register("password", { required: true })}
               type="password"
               id="password"
               name="password"
@@ -51,7 +58,7 @@ const LogIn = () => {
           </p>
         </div>
       </div>
-    </section>
+    </form>
   );
 };
 
