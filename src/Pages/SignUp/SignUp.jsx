@@ -1,11 +1,44 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-
+import { Link,useNavigate} from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthCont";
+import Swal from "sweetalert2";
 const SignUp = () => {
-  const { register, handleSubmit } = useForm()
+  const axiosPublic=useAxiosPublic();
+  const {signUp,updateUserProfile}=useContext(AuthContext)
+  const { register, handleSubmit,reset, } = useForm()
+  const navigate=useNavigate();
   const onSubmitSignUp = (data) => {
     console.log(data)
-    // reset();
+    signUp(data.email,data.password)
+    .then(result=>{
+      const logedUser=result.user;
+      console.log(logedUser)
+      updateUserProfile(data.name,data.photoUrl)
+      .then(()=>{
+        const userInfo={
+          name:data.name,
+          email:data.email,
+        };
+        axiosPublic.post('/users',userInfo)
+        .then((res)=>{
+          if(res.data.insertedId){
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User Created Sucessfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+         
+        });
+        navigate('/')
+      })
+    })
+  
   }
   return (
     <form onSubmit={handleSubmit(onSubmitSignUp)} className="text-gray-600 body-font">
@@ -36,6 +69,21 @@ const SignUp = () => {
               className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
+          <div className="relative mb-4">
+            <label
+              htmlFor="photourl"
+              className="leading-7 text-sm text-gray-600"
+            >
+            Photo Url
+            </label>
+            <input  {...register("photoUrl", { required: true })}
+              type="text"
+
+              className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              required
+            />
+          </div>
+          
           <div className="relative mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">
               Email

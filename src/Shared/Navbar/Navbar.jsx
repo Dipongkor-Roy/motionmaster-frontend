@@ -1,19 +1,29 @@
-import { useEffect, useState } from "react";
-import Dropdown from '../../Components/Dropdown/Dropdown'
+import { useContext, useEffect, useState } from "react";
+import Dropdown from "../../Components/Dropdown/Dropdown";
 import { useScrollPosition } from "../../Hooks/useScrollPosition";
 import logo from "../../assets/LogoMm.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthCont";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
-  const [user] = useState("false");
+  const { user, logOut } = useContext(AuthContext);
+  const [cart]=useCart();
+
   const navBarDetails = ["Home", "All Services", "About Us", "Contact Us"];
   const scrollPos = useScrollPosition();
+
   const [isdark, setIsdark] = useState(
     JSON.parse(localStorage.getItem("isdark"))
   );
   useEffect(() => {
     localStorage.setItem("isdark", JSON.stringify(isdark));
   }, [isdark]);
+  const handleLogout = () => {
+    logOut().then(() => {
+      console.log("Log Out");
+    });
+  };
   return (
     <div
       className={`navbar bg-base-100 h-16 sticky top-0 z-50 transition-shadow ${
@@ -116,7 +126,7 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <span className="badge badge-sm indicator-item">{cart?.length || 0}</span>
             </div>
           </div>
           <div
@@ -126,8 +136,6 @@ const Navbar = () => {
         </div>
         <div className="dropdown dropdown-end">
           {user ? (
-           <Dropdown/>
-          ) : (
             <>
               <div
                 tabIndex={0}
@@ -135,10 +143,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  />
+                  <img alt="photo" src={user?.photoURL} />
                 </div>
               </div>
               <ul
@@ -154,11 +159,13 @@ const Navbar = () => {
                 <li>
                   <a>Settings</a>
                 </li>
-                <li>
+                <li onClick={handleLogout}>
                   <a>Logout</a>
                 </li>
               </ul>
             </>
+          ) : (
+            <Dropdown />
           )}
         </div>
       </div>

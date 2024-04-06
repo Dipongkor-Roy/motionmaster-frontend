@@ -12,7 +12,7 @@ const useAllServices = () => {
     queryKey: ["services"],
     queryFn: async () => {
       const res = await axiosPublic.get("/services");
-      return res.data[0].services;
+      return res.data;
    
     },
   });
