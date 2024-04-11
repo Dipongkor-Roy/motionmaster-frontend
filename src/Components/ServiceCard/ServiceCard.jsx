@@ -41,10 +41,10 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(serviceInfo)
-      }).then((res) => {
-        res.json()
-      }).then((data) => {
-       if(data.insertedId){ //important for inserting data to cart
+      }).then((res) => res.json()
+      ).then((data) => {
+        console.log(data)
+       if(data.acknowledged){ //important for inserting data to cart
         refetch();
          Toast.fire({
           icon: "success",

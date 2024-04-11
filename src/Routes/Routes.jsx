@@ -8,6 +8,7 @@ import Dashboard from "../Layout/Dashboard";
 import UserHome from "../Pages/UserHome/UserHome";
 import MyCart from "../Pages/Dashboard/MyCart";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import ContactUs from "../Pages/Home/ContactUs/ContactUs";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,9 @@ export const router = createBrowserRouter([
       {
         path: "/services",
         element: <AllServices />,
+      },{
+        path:'/contact',
+        element:<ContactUs/>
       },
       {
         path: "/signUp",

@@ -20,6 +20,8 @@ const Dashboard = () => {
            { isAdmin?
            <>
            <li><a>Admin Home</a></li>
+           <li><a>Stats</a></li>
+           <li><a>All Users</a></li>
     
             </>
           :
@@ -31,9 +33,18 @@ const Dashboard = () => {
           </>
           
           }
+            <div className="divider mt-11 font-light"></div>
+         
+          
+          <li><NavLink to='/'><FaHome /> Home Page</NavLink></li>
+          
+     
             
+  
           </ul>
+          
         </div>
+        
       </div>
         
     );

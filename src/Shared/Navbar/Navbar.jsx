@@ -10,7 +10,12 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart]=useCart();
 
-  const navBarDetails = ["Home", "All Services", "About Us", "Contact Us"];
+  const navBarDetails = [
+    { path: '/', text: 'Home' },
+    { path: '/services', text: 'All Services' },
+    { path: '/', text: 'About Us' },
+    { path: '/contact', text: 'Contact Us' },
+  ];
   const scrollPos = useScrollPosition();
 
   const [isdark, setIsdark] = useState(
@@ -56,8 +61,8 @@ const Navbar = () => {
           >
             {navBarDetails.map((item, index) => (
               <li key={index}>
-                <Link to={`/${item.split(" ")[0]}`}>
-                  <a className="text-sm font-md">{item}</a>
+                <Link to={item.path}>
+                  <a className="text-sm font-md">{item.text}</a>
                 </Link>
               </li>
             ))}
@@ -71,8 +76,8 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           {navBarDetails.map((item, index) => (
             <li key={index}>
-              <Link to={`/${item}`}>
-                <a className="text-sm font-md">{item}</a>
+              <Link to={item.path}>
+                <a className="text-sm font-md">{item.text}</a>
               </Link>
             </li>
           ))}
@@ -110,7 +115,7 @@ const Navbar = () => {
           </label>
         </div>
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <Link to='/dashboard/myCart'><div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +133,7 @@ const Navbar = () => {
               </svg>
               <span className="badge badge-sm indicator-item">{cart?.length || 0}</span>
             </div>
-          </div>
+          </div></Link>
           <div
             tabIndex={0}
             className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
