@@ -39,7 +39,7 @@ const MyCart = () => {
 
   return (
     <div className="">
-      <div className="px-5 h-20 flex justify-between items-center">
+      <div className="px-5 md:mt-5 h-20 flex justify-between items-center">
         <p className="text-xl bg-green-100 p-2 mr-3 font-bricolage-grotesque">
           Total Items: {cart.length}
         </p>
@@ -59,7 +59,7 @@ const MyCart = () => {
           </button>
         )}
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <div className="mb-5"></div>
         <table className="table">
           {/* head */}
