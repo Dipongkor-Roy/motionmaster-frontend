@@ -6,7 +6,7 @@ import useCart from "../../Hooks/useCart";
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ServiceCard = ({ service }) => { // Corrected the destructuring of props
-  console.log(service)
+  
   const { name, image, price, _id, description } = service;
   
   const { user } = useContext(AuthContext);

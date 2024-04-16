@@ -12,6 +12,10 @@ import ContactUs from "../Pages/Home/ContactUs/ContactUs";
 import AdminHome from "../Pages/Dashboard/AdminHome";
 import AddServices from "../Pages/Dashboard/AddServices";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import ManageServices from "../Pages/Dashboard/ManageServices";
+
+import UpdateServices from '../Pages/Dashboard/UpdateServices'
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +71,15 @@ export const router = createBrowserRouter([
       {
         path:'allUsers',
         element:<AllUsers/>
+      },
+    {
+        path:'manageServices',
+        element:<ManageServices/>
+      },
+      {
+        path:'updateService/:id',
+        element:<UpdateServices/>,
+        loader:({params})=>fetch(`http://localhost:2000/services/${params.id}`)
       }
     ],
   },

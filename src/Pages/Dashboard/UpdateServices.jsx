@@ -1,54 +1,54 @@
 import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { FaPlusCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { FaPlusCircle } from "react-icons/fa";
 
 const imageApiKey = import.meta.env.VITE_image_apikey;
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageApiKey}`;
-
-const AddServices = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
-
-  const onSubmit = async (data) => {
-      try {
-          const imageFile = { image: data.image[0] };
-          const res = await axiosPublic.post(imageHostingApi, imageFile);
-          
-          if (res.data.data && res.data.data.display_url) {
-              const serviceItem = {
-                  name: data.name,
-                  description: data.description,
-                  price: parseFloat(data.price),
-                  image: res.data.data.display_url
-              };
-              const serviceRes = await axiosSecure.post('/services', serviceItem);
-              if (serviceRes.data.insertedId) {
-                  reset();
-                  Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: `${data.name} added Successfully`,
-                      showConfirmButton: false,
-                      timer: 1500
+const UpdateServices = () => {
+  const [service]=useLoaderData();
+    const {_id,name,price,description}=service;
+    // console.log(_id,name,price,description)
+    const {register,handleSubmit,reset}=useForm();
+    const axiosPublic=useAxiosPublic();
+    const axiosSecure=useAxiosSecure();
+    const onSubmit=async(data)=>{
+        console.log(data)
+        const imageFile={image:data.image[0]};
+        const res=await axiosPublic.post(imageHostingApi,imageFile,{
+            headers:{
+                "Content-Type":"multipart/form-data",
+            },
+        });
+        if(res.data.success){
+            const serviceItem={
+                name:data.name,
+                description:data.description,
+                price:parseFloat(data.price),
+                image:res.data.data.display_url  
+               }
+               const serviceRes=await axiosSecure.patch(`/services/${_id}`,serviceItem);
+               if(serviceRes.data.modifiedCount>0){
+                //menu item added alert
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} added Successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
                   });
-              } else {
-                  throw new Error('Failed to add service');
-              }
-          } else {
-              throw new Error('Failed to upload image');
-          }
-      } catch (error) {
-          console.error('Error:', error);
-          // Handle error (e.g., show error message to user)
-      }
-  };
-  return (
-    <div>
+    
+            }
+        }
+    }
+    
+    return (
+        <div>
         <div className="flex items-center justify-center mb-5">
-            <h2 className="text-2xl font-bricolage-grotesque bg-green-100 p-2 rounded-md">Add Services</h2>
+            <h2 className="text-2xl font-bricolage-grotesque bg-green-100 p-2 rounded-md">Update Services</h2>
         </div>
      <div className="flex items-center justify-center ">
     
@@ -58,6 +58,7 @@ const AddServices = () => {
               <span className="label-text">Service Name*</span>
             </div>
             <input
+            defaultValue={name}
               {...register("name", { required: true })}
               type="text"
               placeholder="Service Name"
@@ -75,6 +76,7 @@ const AddServices = () => {
                 <span className="label-text">Price*</span>
               </div>
               <input
+              defaultValue={price}
                 {...register("price", { required: true })}
                 type="number"
                 placeholder="Price"
@@ -88,6 +90,7 @@ const AddServices = () => {
                 <span className="label-text">Description</span>
               </div>
               <textarea
+              defaultValue={description}
                 {...register("description")}
                 className="textarea textarea-bordered h-24"
                 placeholder="Description"
@@ -103,12 +106,12 @@ const AddServices = () => {
             </div>
           </div>
           <button type="submit" className="btn mt-3 rounded-md">
-            Add iteam <FaPlusCircle />
+            Update Serivice <FaPlusCircle />
           </button>
         </form>
      </div>
     </div>
-  );
+    );
 };
 
-export default AddServices;
+export default UpdateServices;
