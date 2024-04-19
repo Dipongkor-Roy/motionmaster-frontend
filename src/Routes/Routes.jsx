@@ -15,6 +15,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers";
 import ManageServices from "../Pages/Dashboard/ManageServices";
 
 import UpdateServices from '../Pages/Dashboard/UpdateServices'
+import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
         path: "/logIn",
         element: <LogIn />,
       },
+      {
+        path:'*',
+        element:<PageNotFound/>
+      }
     ],
   },
   {

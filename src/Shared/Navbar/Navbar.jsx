@@ -7,7 +7,9 @@ import { AuthContext } from "../../Providers/AuthCont";
 import useCart from "../../Hooks/useCart";
 import useAdmin from "../../Hooks/useAdmin";
 
+
 const Navbar = () => {
+  const [isAdmin] = useAdmin();
   const svg = (
     <svg
       height="24"
@@ -21,7 +23,7 @@ const Navbar = () => {
   );
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
-  const [isAdmin] = useAdmin();
+ 
 
   const navBarDetails = [
     { path: "/", text: "Home" },
@@ -92,12 +94,19 @@ const Navbar = () => {
       </div>
       <div className="flex-none ">
         {user && isAdmin && (
-          <div className="tooltip tooltip-bottom" data-tip="Dashboard">
+          <div className="tooltip tooltip-bottom" data-tip="Admin Dashboard">
             <div className="btn btn-ghost btn-circle">
               <Link to="/dashboard/adminHome"> {svg}</Link>
             </div>
           </div>
         )}
+        {
+            user && !isAdmin && (<div className="tooltip tooltip-bottom" data-tip="User Dashboard">
+            <div className="btn btn-ghost btn-circle">
+              <Link to="/dashboard/userHome"> {svg}</Link>
+            </div>
+          </div>)
+        }
 
         <div className="dropdown dropdown-end">
           <Link to="/dashboard/myCart">

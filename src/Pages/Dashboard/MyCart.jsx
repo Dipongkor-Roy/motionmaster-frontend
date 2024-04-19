@@ -49,7 +49,7 @@ const MyCart = () => {
         {cart.length ? (
           <Link to="/dashboard/payment">
             {" "}
-            <button className="btn bg-green-100 btn-circle ml-4 font-bricolage-grotesque">
+            <button className="btn disabled: bg-green-100 btn-circle ml-4 font-bricolage-grotesque">
               Pay
             </button>
           </Link>

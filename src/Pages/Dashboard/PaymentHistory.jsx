@@ -3,7 +3,7 @@
 const PaymentHistory = () => {
     return (
         <div>
-            <h3>Payment History</h3>
+            <h3 className="text-xl text-center bg-green-100 py-2">No Activity</h3>
         </div>
     );
 };
