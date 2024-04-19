@@ -28,7 +28,7 @@ const Navbar = () => {
   const navBarDetails = [
     { path: "/", text: "Home" },
     { path: "/services", text: "All Services" },
-    { path: "/", text: "About Us" },
+    { path: "/about", text: "About Us" },
     { path: "/contact", text: "Contact Us" },
   ];
   const scrollPos = useScrollPosition();
