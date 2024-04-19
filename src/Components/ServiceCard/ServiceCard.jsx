@@ -35,7 +35,7 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
         email: user.email
       };
 
-      fetch('http://localhost:2000/carts', {
+      fetch('https://motionmaster-server.vercel.app/carts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

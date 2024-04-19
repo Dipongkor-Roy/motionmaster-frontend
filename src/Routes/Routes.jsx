@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
       {
         path:'updateService/:id',
         element:<UpdateServices/>,
-        loader:({params})=>fetch(`http://localhost:2000/services/${params.id}`)
+        loader:({params})=>fetch(`https://motionmaster-server.vercel.app/services/${params.id}`)
       }
     ],
   },
