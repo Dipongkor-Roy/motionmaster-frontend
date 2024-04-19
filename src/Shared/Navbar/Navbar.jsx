@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import { useScrollPosition } from "../../Hooks/useScrollPosition";
-import logo from "../../assets/LogoMm.png";
+import logo from "../../assets/LogoMm copy.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthCont";
 import useCart from "../../Hooks/useCart";
