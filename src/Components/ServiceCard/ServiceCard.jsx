@@ -6,7 +6,13 @@ import useCart from "../../Hooks/useCart";
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ServiceCard = ({ service }) => { // Corrected the destructuring of props
-  
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+  });
   const { name, image, price, _id, description } = service;
   
   const { user } = useContext(AuthContext);
@@ -67,6 +73,18 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
           }
         });
        }
+      });
+    } else{
+      swalWithBootstrapButtons.fire({
+        title: "Cancelled",
+        text: "Please LogIn To Add To Cart",
+        icon: "error"
+      }).then((result) => {
+        // Check if the user clicked "OK"
+        if (result.isConfirmed) {
+          // Navigate to a different page
+          navigate("/logIn");
+        }
       });
     }
   };
