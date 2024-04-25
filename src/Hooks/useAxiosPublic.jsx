@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosPublic = axios.create({
 
-  baseURL: "https://motionmaster-server.vercel.app",
+  baseURL: "https://motionmaster-server.vercel.app/",
 
 });
 

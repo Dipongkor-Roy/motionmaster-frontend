@@ -17,6 +17,8 @@ import ManageServices from "../Pages/Dashboard/ManageServices";
 import UpdateServices from '../Pages/Dashboard/UpdateServices'
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import AdminRoutes from "./AdminRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <AllServices />,
+        element: <PrivateRoutes><AllServices /></PrivateRoutes>,
       },{
         path:'/contact',
         element:<ContactUs/>
@@ -55,7 +57,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
     children: [
       {
         path: "userhome",
@@ -72,7 +74,7 @@ export const router = createBrowserRouter([
       //admin
       {
         path:'adminHome',
-        element:<AdminHome/>
+        element:<AdminRoutes><AdminHome/></AdminRoutes>
 
       },
       {
@@ -81,15 +83,15 @@ export const router = createBrowserRouter([
       },
       {
         path:'allUsers',
-        element:<AllUsers/>
+        element:<AdminRoutes><AllUsers/></AdminRoutes>
       },
     {
         path:'manageServices',
-        element:<ManageServices/>
+        element:<AdminRoutes><ManageServices/></AdminRoutes>
       },
       {
         path:'updateService/:id',
-        element:<UpdateServices/>,
+        element:<AdminRoutes><UpdateServices/></AdminRoutes>,
         loader:({params})=>fetch(`https://motionmaster-server.vercel.app/services/${params.id}`)
       }
     ],

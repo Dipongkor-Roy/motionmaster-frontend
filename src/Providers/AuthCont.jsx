@@ -64,11 +64,11 @@ const AuthCont = ({ children }) => {
         localStorage.removeItem('access-token');
         setLoading(false);
     }
-    
-      return () => {
-        return unSubscribe();
-      };
+      
     });
+    return () => {
+      return unSubscribe();
+    };
   }, [axiosPublic]);
   const authInfo = {
     user,

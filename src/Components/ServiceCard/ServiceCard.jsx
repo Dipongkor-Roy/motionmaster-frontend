@@ -26,6 +26,7 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
   });
   const handleAddtoCart = (service) => { // Removed serviceInfo parameter as it's not needed here
     console.log(service)
+
     if (user && user.email) {
       const serviceInfo = {
         serviceItem: _id,
@@ -46,10 +47,10 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
         console.log(data)
        if(data.acknowledged){ //important for inserting data to cart
         refetch();
-         Toast.fire({
+        Toast.fire({
           icon: "success",
           title: "Added To The Cart"
-        });
+        }); 
        }
        else{
         Swal.fire({
@@ -88,7 +89,7 @@ const ServiceCard = ({ service }) => { // Corrected the destructuring of props
         </h2>
         <div className="pt-3 flex justify-between items-center">
           <p className="mt-1">${price}</p>
-          <button onClick={handleAddtoCart} className="btn btn-sm bg-green-100 hover:bg-green-200 rounded-md text-slate-800">Grab It </button>
+          <button onClick={() => handleAddtoCart(service)} className="btn btn-sm bg-green-100 hover:bg-green-200 rounded-md text-slate-800">Grab It </button>
         </div>
       </div>
     </div>
